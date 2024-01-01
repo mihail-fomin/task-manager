@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ClerkProvider, auth } from "@clerk/nextjs";
+
 import './globals.css'
 import ContextProvider from './providers/ContextProvider'
 import GlobalStylesProvider from './providers/GlobalStylesProvider'
@@ -17,25 +19,31 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+  const {userId} = auth()
+
   return (
-    <html lang="en">
-        <head>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-            crossOrigin="anonymous"
-            referrerPolicy="no-referrer"
-          />
-        </head>
-      <body className={inter.className}>
-        <ContextProvider>
-          <GlobalStylesProvider>
-            <Sidebar />
-            {children}
-          </GlobalStylesProvider>
-        </ContextProvider>
-        </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+          <head>
+            <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+              crossOrigin="anonymous"
+              referrerPolicy="no-referrer"
+            />
+          </head>
+        <body className={inter.className}>
+          <ContextProvider>
+            <GlobalStylesProvider>
+              {userId && <Sidebar />}
+              {children}
+            </GlobalStylesProvider>
+          </ContextProvider>
+          </body>
+      </html>
+    </ClerkProvider>
+
   )
 }
