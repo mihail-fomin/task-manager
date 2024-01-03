@@ -1,6 +1,8 @@
 'use client';
 
+import axios from "axios";
 import React, {useState} from "react";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const [title, setTitle] = useState("");
@@ -31,7 +33,7 @@ export default function Home() {
     }
   }
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
 
     const task = {
@@ -40,6 +42,20 @@ export default function Home() {
       date,
       completed,
       important
+    }
+
+    try {
+      const response = await axios.post('/api/tasks', task)
+
+      if (response.data.error) {
+        toast.error(response.data.error)
+        return
+      }
+
+      toast.success('Task created successfully')
+    } catch (error) {
+      toast.error('Something went wrong')
+      console.error(error)
     }
   }
 
