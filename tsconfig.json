@@ -22,14 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/context/globalProvider.js",
-    "app/utils/Icons.js",
-    "app/utils/connect.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/context/globalProvider.js", "app/utils/Icons.js", "app/utils/connect.js"],
   "exclude": ["node_modules"]
 }

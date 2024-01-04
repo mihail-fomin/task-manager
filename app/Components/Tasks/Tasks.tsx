@@ -1,19 +1,19 @@
-'use client'
-import { useGlobalState } from '@/app/context/globalProvider'
-import React from 'react'
-import styled from 'styled-components'
-import CreateContent from '../Modals/CreateContent'
-import TaskItem from '../TaskItem/TaskItem'
-import { add, plus } from '@/app/utils/Icons'
-import Modal from '../Modals/Modal'
+"use client";
+import { useGlobalState } from "@/app/context/globalProvider";
+import React from "react";
+import styled from "styled-components";
+import CreateContent from "../Modals/CreateContent";
+import TaskItem from "../TaskItem/TaskItem";
+import { add, plus } from "@/app/utils/Icons";
+import Modal from "../Modals/Modal";
 
 interface Props {
-  title: string
-  tasks: any[]
+  title: string;
+  tasks: any[];
 }
 
 function Tasks({ title, tasks }: Props) {
-  const { theme, isLoading, openModal, modal } = useGlobalState()
+  const { theme, isLoading, openModal, modal } = useGlobalState();
 
   return (
     <TaskStyled theme={theme}>
@@ -41,7 +41,7 @@ function Tasks({ title, tasks }: Props) {
         </button>
       </div>
     </TaskStyled>
-  )
+  );
 }
 
 const TaskStyled = styled.main`
@@ -93,7 +93,7 @@ const TaskStyled = styled.main`
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -0.5rem;
       left: 0;
@@ -128,6 +128,7 @@ const TaskStyled = styled.main`
       color: ${(props) => props.theme.colorGrey0};
     }
   }
-`
+`;
 
-export default Tasks
+
+export default Tasks;

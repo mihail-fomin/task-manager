@@ -1,13 +1,13 @@
-'use client'
-import React from 'react'
-import styled from 'styled-components'
+"use client";
+import React from "react";
+import styled from "styled-components";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 function GlobalStyleProvider({ children }: Props) {
-  return <GlobalStyles>{children}</GlobalStyles>
+  return <GlobalStyles>{children}</GlobalStyles>;
 }
 
 const GlobalStyles = styled.div`
@@ -27,6 +27,6 @@ const GlobalStyles = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
   }
-`
+`;
 
-export default GlobalStyleProvider
+export default GlobalStyleProvider;

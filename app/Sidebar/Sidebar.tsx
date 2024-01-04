@@ -1,20 +1,21 @@
 'use client'
 import React from 'react'
 import Image from '@/node_modules/next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from "next/navigation";
 import Link from '@/node_modules/next/link'
 
 import styled from 'styled-components'
 import { useGlobalState } from '../context/globalProvider'
 import menu from '../utils/menu'
 
+
 export default function Sidebar() {
-  const { theme } = useGlobalState()
+  const {theme} = useGlobalState()
 
   const router = useRouter()
   const pathname = usePathname()
 
-  const handleClick = (link: string) => {
+  const handleClick = (link:string) => {
     router.push(link)
   }
 
@@ -23,7 +24,7 @@ export default function Sidebar() {
       <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">
-          <Image width={70} height={70} src="/avatar.jpg" alt="profile" />
+          <Image width={70} height={70} src="/avatar.jpg" alt='profile'/>
         </div>
         <h1>
           <span>Mary</span>
@@ -31,27 +32,25 @@ export default function Sidebar() {
         </h1>
       </div>
       <ul className="nav-items">
-        {menu.map((item) => {
+        {menu.map(item => {
           const link = item.link
 
-          return (
-            <li
-              key={item.title}
-              className={`nav-item ${pathname === link ? 'active' : ''}`}
-              onClick={() => handleClick(link)}
-            >
-              {item.icon}
-              <Link href={link}>{item.title}</Link>
-            </li>
-          )
+          return <li
+          key={item.title}
+          className={`nav-item ${pathname === link ? 'active' : ''}`} 
+            onClick={() => handleClick(link)}
+          >
+            {item.icon}
+            <Link href={link}>{item.title}</Link>
+          </li>
         })}
       </ul>
       <button>button</button>
     </SidebarStyled>
   )
-}
+};
 
-const SidebarStyled = styled.nav`
+const SidebarStyled = styled.nav<{ collapsed: boolean }>`
   position: relative;
   width: ${(props) => props.theme.sidebarWidth};
   background-color: ${(props) => props.theme.colorBg2};
@@ -70,6 +69,8 @@ const SidebarStyled = styled.nav`
     z-index: 100;
 
     transition: all 0.3s cubic-bezier(0.53, 0.21, 0, 1);
+    transform: ${(props) =>
+      props.collapsed ? "translateX(-107%)" : "translateX(0)"};
 
     .toggle-nav {
       display: block !important;
@@ -200,7 +201,7 @@ const SidebarStyled = styled.nav`
 
     &::after {
       position: absolute;
-      content: '';
+      content: "";
       left: 0;
       top: 0;
       width: 0;
@@ -212,7 +213,7 @@ const SidebarStyled = styled.nav`
 
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       right: 0;
       top: 0;
       width: 0%;
@@ -259,4 +260,4 @@ const SidebarStyled = styled.nav`
   > button {
     margin: 1.5rem;
   }
-`
+`;
