@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext } from 'react'
 import themes from './themes'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 export const GlobalContext = createContext()
 export const GlobalUpdateContext = createContext()
