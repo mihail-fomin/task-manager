@@ -9,12 +9,24 @@ export const GlobalProvider = ({ children }) => {
   const [selectedTheme, setSelectedTheme] = useState(0)
   const theme = themes[selectedTheme]
   const [tasks, setTasks] = useState([]);
-  
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         theme,
         tasks,
+        modal,
+        openModal,
+        closeModal,
       }}
     >
       <GlobalUpdateContext.Provider value={setSelectedTheme}>
