@@ -1,20 +1,20 @@
-"use client";
-import { useGlobalState } from "@/app/context/globalProvider";
-import { edit, trash } from "@/app/utils/Icons";
-import React from "react";
-import styled from "styled-components";
+'use client'
+import { useGlobalState } from '@/app/context/globalProvider'
+import { edit, trash } from '@/app/utils/Icons'
+import React from 'react'
+import styled from 'styled-components'
 // import formatDate from "@/app/utils/formatDate";
 
 interface Props {
-  title: string;
-  description: string;
-  date: string;
-  isCompleted: boolean;
-  id: string;
+  title: string
+  description: string
+  date: string
+  isCompleted: boolean
+  id: string
 }
 
 function TaskItem({ title, description, date, isCompleted, id }: Props) {
-  const { theme, deleteTask, updateTask } = useGlobalState();
+  const { theme, deleteTask, updateTask } = useGlobalState()
   return (
     <TaskItemStyled theme={theme}>
       <h1>{title}</h1>
@@ -28,9 +28,9 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
               const task = {
                 id,
                 isCompleted: !isCompleted,
-              };
+              }
 
-              updateTask(task);
+              updateTask(task)
             }}
           >
             Completed
@@ -42,9 +42,9 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
               const task = {
                 id,
                 isCompleted: !isCompleted,
-              };
+              }
 
-              updateTask(task);
+              updateTask(task)
             }}
           >
             Incomplete
@@ -54,14 +54,14 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
         <button
           className="delete"
           onClick={() => {
-            deleteTask(id);
+            deleteTask(id)
           }}
         >
           {trash}
         </button>
       </div>
     </TaskItemStyled>
-  );
+  )
 }
 
 const TaskItemStyled = styled.div`
@@ -117,6 +117,6 @@ const TaskItemStyled = styled.div`
       background: ${(props) => props.theme.colorGreenDark} !important;
     }
   }
-`;
+`
 
-export default TaskItem;
+export default TaskItem

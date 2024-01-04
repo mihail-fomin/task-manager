@@ -1,30 +1,30 @@
-import { list, check, todo, home } from "./Icons";
+import { list, check, todo, home } from './Icons'
 
 const menu = [
   {
     id: 1,
-    title: "All Tasks",
+    title: 'All Tasks',
     icon: home,
-    link: "/",
+    link: '/',
   },
   {
     id: 2,
-    title: "Important!",
+    title: 'Important!',
     icon: list,
-    link: "/important",
+    link: '/important',
   },
   {
     id: 3,
-    title: "Completed!",
+    title: 'Completed!',
     icon: check,
-    link: "/completed",
+    link: '/completed',
   },
   {
     id: 4,
-    title: "Do It Now",
+    title: 'Do It Now',
     icon: todo,
-    link: "/incomplete",
+    link: '/incomplete',
   },
-];
+]
 
-export default menu;
+export default menu
