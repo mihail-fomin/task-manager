@@ -1,6 +1,7 @@
 'use client'
-import React, {createContext, useState, useContext } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 import themes from './themes'
+import axios from 'axios'
 
 export const GlobalContext = createContext()
 export const GlobalUpdateContext = createContext()
@@ -8,16 +9,32 @@ export const GlobalUpdateContext = createContext()
 export const GlobalProvider = ({ children }) => {
   const [selectedTheme, setSelectedTheme] = useState(0)
   const theme = themes[selectedTheme]
-  const [tasks, setTasks] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [tasks, setTasks] = useState([])
+  const [modal, setModal] = useState(false)
+  const [isLoading, setIsloading] = useState(false)
+
+  const allTasks = async () => {
+    setIsloading(true)
+    try {
+      const response = await axios.get('/api/tasks')
+      setTasks(response.data)
+      setIsloading(false)
+    } catch (error) {
+      console.log('error: ', error)
+    }
+  }
+
+  React.useEffect(() => {
+    allTasks()
+  }, [])
 
   const openModal = () => {
-    setModal(true);
-  };
+    setModal(true)
+  }
 
   const closeModal = () => {
-    setModal(false);
-  };
+    setModal(false)
+  }
 
   return (
     <GlobalContext.Provider
@@ -29,9 +46,7 @@ export const GlobalProvider = ({ children }) => {
         closeModal,
       }}
     >
-      <GlobalUpdateContext.Provider value={setSelectedTheme}>
-        {children}
-      </GlobalUpdateContext.Provider>
+      <GlobalUpdateContext.Provider value={setSelectedTheme}>{children}</GlobalUpdateContext.Provider>
     </GlobalContext.Provider>
   )
 }
