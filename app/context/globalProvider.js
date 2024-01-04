@@ -1,6 +1,7 @@
 'use client'
 import React, { createContext, useState, useContext } from 'react'
 import themes from './themes'
+import toast from 'react-hot-toast'
 
 export const GlobalContext = createContext()
 export const GlobalUpdateContext = createContext()
@@ -10,6 +11,23 @@ export const GlobalProvider = ({ children }) => {
   const theme = themes[selectedTheme]
   const [tasks, setTasks] = useState([])
   const [modal, setModal] = useState(false)
+  const [isLoading, setIsloading] = useState(false)
+
+  const allTasks = async () => {
+    setIsloading(true)
+    try {
+      const response = await axios.get('/api/tasks')
+      setTasks(response.data)
+      setIsloading(false)
+    } catch (error) {
+      console.error(error)
+      toast.error('Something went wrong')
+    }
+  }
+
+  React.useEffect(() => {
+    allTasks()
+  }, [])
 
   const openModal = () => {
     setModal(true)

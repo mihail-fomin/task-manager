@@ -50,6 +50,20 @@ export async function GET(req: Request) {
   const errorMessage = 'ERROR GETTING TASK'
 
   try {
+    const { userId } = auth()
+
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthrized', status: 401 })
+    }
+
+    const tasks = await prisma.task.findMany({
+      where: {
+        userId,
+      },
+    })
+    console.log('tasks: ', tasks)
+
+    return NextResponse.json(tasks)
   } catch (error) {
     console.log(errorMessage, error)
     return NextResponse.json({ error: errorMessage, status: 500 })
