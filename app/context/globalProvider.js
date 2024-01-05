@@ -45,6 +45,10 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  const completedTasks = tasks.filter((task) => task.isCompleted === true)
+  const incompletedTasks = tasks.filter((task) => task.isCompleted === false)
+  const importantTasks = tasks.filter((task) => task.isImportant === true)
+
   React.useEffect(() => {
     if (user) {
       allTasks()
@@ -64,6 +68,9 @@ export const GlobalProvider = ({ children }) => {
       value={{
         theme,
         tasks,
+        completedTasks,
+        incompletedTasks,
+        importantTasks,
         deleteTask,
         isLoading,
         modal,

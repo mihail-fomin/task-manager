@@ -4,9 +4,9 @@ import { useGlobalState } from '../context/globalProvider'
 import Tasks from '../Components/Tasks/Tasks'
 
 function page() {
-  // const { completedTasks } = useGlobalState();
+  const { completedTasks } = useGlobalState()
 
-  return <Tasks title="Completed Tasks" tasks={[]} />
+  return <Tasks title="Completed Tasks" tasks={completedTasks} />
 }
 
 export default page
