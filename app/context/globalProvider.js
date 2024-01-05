@@ -34,7 +34,7 @@ export const GlobalProvider = ({ children }) => {
     setIsloading(true)
 
     try {
-      const response = await axios.delete(`/api/tasks/${id}`)
+      await axios.delete(`/api/tasks/${id}`)
 
       allTasks()
       setIsloading(false)

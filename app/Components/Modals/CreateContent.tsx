@@ -23,10 +23,10 @@ export default function Home() {
         setDate(e.target.value)
         break
       case 'completed':
-        setCompleted(e.target.value)
+        setCompleted(Boolean(e.target.value))
         break
       case 'important':
-        setImportant(e.target.value)
+        setImportant(Boolean(e.target.value))
         break
       default:
         break
