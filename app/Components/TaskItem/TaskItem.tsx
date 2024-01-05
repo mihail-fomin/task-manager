@@ -19,7 +19,7 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
     <TaskItemStyled theme={theme}>
       <h1>{title}</h1>
       <p>{description}</p>
-      <p className="date">{formatDate(date)}</p>
+      {/* <p className="date">{formatDate(date)}</p> */}
       <div className="task-footer">
         {isCompleted ? (
           <button
