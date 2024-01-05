@@ -30,23 +30,23 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
                 isCompleted: !isCompleted,
               }
 
-              updateTask(task)
+              // updateTask(task)
             }}
           >
             Completed
           </button>
         ) : (
           <button
-            className="incomplete"
+            className="incompleted"
             onClick={() => {
               const task = {
                 id,
                 isCompleted: !isCompleted,
               }
-              updateTask(task)
+              // updateTask(task)
             }}
           >
-            Incomplete
+            Incompleted
           </button>
         )}
         <button className="edit">{edit}</button>
@@ -105,7 +105,7 @@ const TaskItemStyled = styled.div`
     }
 
     .completed,
-    .incomplete {
+    .incompleted {
       display: inline-block;
       padding: 0.4rem 1rem;
       background: ${(props) => props.theme.colorDanger};

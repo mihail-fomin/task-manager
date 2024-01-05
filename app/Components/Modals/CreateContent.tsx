@@ -3,6 +3,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
+import styled from 'styled-components'
 
 export default function Home() {
   const [title, setTitle] = useState('')
@@ -60,7 +61,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <TaskContentStyled>
       <form onSubmit={handleSubmit}>
         <h1>Create a Task</h1>
         <div className="input-control">
@@ -115,6 +116,13 @@ export default function Home() {
           </button>
         </div>
       </form>
-    </>
+    </TaskContentStyled>
   )
 }
+
+const TaskContentStyled = styled.div`
+  .input-control input, textarea{
+
+    color: #000;
+  }
+`
