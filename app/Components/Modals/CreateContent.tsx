@@ -121,8 +121,8 @@ export default function Home() {
 }
 
 const TaskContentStyled = styled.div`
-  .input-control input, textarea{
-
+  .input-control input,
+  textarea {
     color: #000;
   }
 `

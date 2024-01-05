@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "app/context/globalProvider.js",
     "app/utils/Icons.js",
-    "app/utils/connect.js"
+    "app/utils/connect.js",
+    "app/utils/formatDate.ts"
   ],
   "exclude": ["node_modules"]
 }
