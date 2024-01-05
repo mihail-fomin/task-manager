@@ -30,7 +30,7 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
                 isCompleted: !isCompleted,
               }
 
-              // updateTask(task)
+              updateTask(task)
             }}
           >
             Completed
@@ -43,7 +43,7 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
                 id,
                 isCompleted: !isCompleted,
               }
-              // updateTask(task)
+              updateTask(task)
             }}
           >
             Incompleted

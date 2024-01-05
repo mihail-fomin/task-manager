@@ -73,16 +73,24 @@ export async function PUT(req: Request) {
   const errorMessage = 'ERROR UPDAITNG TASK'
 
   try {
-  } catch (error) {
-    console.error(errorMessage, error)
-    return NextResponse.json({ error: errorMessage, status: 500 })
-  }
-}
+    const { userId } = auth()
+    const { isCompleted, id } = await req.json()
 
-export async function DELETE(req: Request) {
-  const errorMessage = 'ERROR DELETING TASK'
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthrized', status: 401 })
+    }
 
-  try {
+    const task = await prisma.task.update({
+      where: {
+        id,
+      },
+      data: {
+        isCompleted,
+      },
+    })
+    console.log('task: ', task)
+
+    return NextResponse.json(task)
   } catch (error) {
     console.error(errorMessage, error)
     return NextResponse.json({ error: errorMessage, status: 500 })
