@@ -7,12 +7,16 @@ import Link from '@/node_modules/next/link'
 import styled from 'styled-components'
 import { useGlobalState } from '../context/globalProvider'
 import menu from '../utils/menu'
+import Button from '../Components/Button/Button'
+import { logout } from '../utils/Icons'
+import { useClerk } from '@clerk/nextjs'
 
 export default function Sidebar() {
   const { theme } = useGlobalState()
 
   const router = useRouter()
   const pathname = usePathname()
+  const {signOut} = useClerk()
 
   const handleClick = (link: string) => {
     router.push(link)
@@ -46,7 +50,20 @@ export default function Sidebar() {
           )
         })}
       </ul>
-      <button>button</button>
+      <div className="sign-out relative m-6">
+        <Button
+          name={'Sign out'}
+          type={'submit'}
+          padding={'0.4rem 0.8rem'}
+          borderRad={'0.8rem'}
+          fw={'500'}
+          fs={'1.2rem'}
+          icon={logout}
+          click={() => {
+            signOut(() => router.push('/signin'))
+          }}
+        />
+      </div>
     </SidebarStyled>
   )
 }
