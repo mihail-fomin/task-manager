@@ -43,7 +43,6 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
                 id,
                 isCompleted: !isCompleted,
               }
-
               updateTask(task)
             }}
           >

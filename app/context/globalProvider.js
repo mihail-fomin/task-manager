@@ -30,11 +30,26 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  const deleteTask = async (id) => {
+    setIsloading(true)
+
+    try {
+      const response = await axios.delete(`/api/tasks/${id}`)
+
+      allTasks()
+      setIsloading(false)
+      toast.success('Task deleted')
+    } catch (error) {
+      console.error(error)
+      toast.error('Something went wrong')
+    }
+  }
+
   React.useEffect(() => {
     if (user) {
       allTasks()
     }
-  }, [])
+  }, [user])
 
   const openModal = () => {
     setModal(true)
@@ -49,6 +64,8 @@ export const GlobalProvider = ({ children }) => {
       value={{
         theme,
         tasks,
+        deleteTask,
+        isLoading,
         modal,
         openModal,
         closeModal,
