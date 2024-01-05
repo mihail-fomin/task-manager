@@ -16,7 +16,7 @@ export default function Sidebar() {
 
   const router = useRouter()
   const pathname = usePathname()
-  const {signOut} = useClerk()
+  const { signOut } = useClerk()
 
   const handleClick = (link: string) => {
     router.push(link)

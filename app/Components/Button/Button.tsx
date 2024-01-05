@@ -19,7 +19,6 @@ interface Props {
 export default function Button({ icon, name, background, padding, borderRad, fw, fs, click, type, border }: Props) {
   const { theme } = useGlobalState()
 
-
   return (
     <ButtonStyled
       theme={theme}

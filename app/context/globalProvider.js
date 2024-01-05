@@ -3,13 +3,17 @@ import React, { createContext, useState, useContext } from 'react'
 import themes from './themes'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { useUser } from '@clerk/nextjs'
 
 export const GlobalContext = createContext()
 export const GlobalUpdateContext = createContext()
 
 export const GlobalProvider = ({ children }) => {
+  const { user } = useUser()
+
   const [selectedTheme, setSelectedTheme] = useState(0)
   const theme = themes[selectedTheme]
+
   const [tasks, setTasks] = useState([])
   const [modal, setModal] = useState(false)
   const [isLoading, setIsloading] = useState(false)
@@ -27,7 +31,9 @@ export const GlobalProvider = ({ children }) => {
   }
 
   React.useEffect(() => {
-    allTasks()
+    if (user) {
+      allTasks()
+    }
   }, [])
 
   const openModal = () => {
