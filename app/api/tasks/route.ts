@@ -41,7 +41,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(task)
   } catch (error) {
-    console.log(errorMessage, error)
+    console.error(errorMessage, error)
     return NextResponse.json({ error: errorMessage, status: 500 })
   }
 }
@@ -61,11 +61,10 @@ export async function GET(req: Request) {
         userId,
       },
     })
-    console.log('tasks: ', tasks)
 
     return NextResponse.json(tasks)
   } catch (error) {
-    console.log(errorMessage, error)
+    console.error(errorMessage, error)
     return NextResponse.json({ error: errorMessage, status: 500 })
   }
 }
@@ -75,7 +74,7 @@ export async function PUT(req: Request) {
 
   try {
   } catch (error) {
-    console.log(errorMessage, error)
+    console.error(errorMessage, error)
     return NextResponse.json({ error: errorMessage, status: 500 })
   }
 }
@@ -85,7 +84,7 @@ export async function DELETE(req: Request) {
 
   try {
   } catch (error) {
-    console.log(errorMessage, error)
+    console.error(errorMessage, error)
     return NextResponse.json({ error: errorMessage, status: 500 })
   }
 }
