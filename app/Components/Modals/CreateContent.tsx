@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import { useGlobalState } from '@/app/context/globalProvider'
 import styled from 'styled-components'
 import Button from '../Button/Button'
-import { add, plus } from "@/app/utils/Icons";
+import { add, plus } from '@/app/utils/Icons'
 
 export default function Home() {
   const [title, setTitle] = useState('')
@@ -16,7 +16,7 @@ export default function Home() {
   const [completed, setCompleted] = useState(false)
   const [important, setImportant] = useState(false)
 
-  const {theme} = useGlobalState()
+  const { theme } = useGlobalState()
 
   const handleChange = (name: string) => (e: any) => {
     switch (name) {
@@ -67,70 +67,63 @@ export default function Home() {
   }
 
   return (
-    <CreateContentStyled onSubmit={handleSubmit} theme ={theme}>
-        <h1>Create a Task</h1>
-        <div className="input-control">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            name="title"
-            onChange={handleChange('title')}
-            placeholder="Title"
-          />
-        </div>
-        <div className="input-control">
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            name="description"
-            rows={4}
-            onChange={handleChange('description')}
-            placeholder="description"
-          />
-        </div>
-        <div className="input-control">
-          <label htmlFor="description">Date</label>
-          <input type="date" id="date" value={date} name="date" onChange={handleChange('date')} />
-        </div>
+    <CreateContentStyled onSubmit={handleSubmit} theme={theme}>
+      <h1>Create a Task</h1>
+      <div className="input-control">
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title" value={title} name="title" onChange={handleChange('title')} placeholder="Title" />
+      </div>
+      <div className="input-control">
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          value={description}
+          name="description"
+          rows={4}
+          onChange={handleChange('description')}
+          placeholder="description"
+        />
+      </div>
+      <div className="input-control">
+        <label htmlFor="description">Date</label>
+        <input type="date" id="date" value={date} name="date" onChange={handleChange('date')} />
+      </div>
 
-        <div className="input-control toggler">
-          <label htmlFor="completed">Toggle Completed</label>
-          <input
-            className='custom-checkbox'
-            type="checkbox"
-            id="completed"
-            checked={completed}
-            name="completed"
-            value="yes"
-            onChange={handleChange('completed')}
-          />
-        </div>
+      <div className="input-control toggler">
+        <label htmlFor="completed">Toggle Completed</label>
+        <input
+          className="custom-checkbox"
+          type="checkbox"
+          id="completed"
+          checked={completed}
+          name="completed"
+          value="yes"
+          onChange={handleChange('completed')}
+        />
+      </div>
 
-        <div className="input-control toggler">
-          <label htmlFor="important">Important</label>
-          <input
-            type="checkbox"
-            id="important"
-            checked={important}
-            name="important"
-            onChange={handleChange('important')}
-          />
-        </div>
+      <div className="input-control toggler">
+        <label htmlFor="important">Important</label>
+        <input
+          type="checkbox"
+          id="important"
+          checked={important}
+          name="important"
+          onChange={handleChange('important')}
+        />
+      </div>
 
-        <div className="submit-btn flex justify-end">
-          <Button
-            type="submit"
-            name="Create Task"
-            icon={add}
-            padding={"0.8rem 2rem"}
-            borderRad={"0.8rem"}
-            fw={"500"}
-            fs={"1.2rem"}
-            background={"rgb(0, 163, 255)"}
-          />
+      <div className="submit-btn flex justify-end">
+        <Button
+          type="submit"
+          name="Create Task"
+          icon={add}
+          padding={'0.8rem 2rem'}
+          borderRad={'0.8rem'}
+          fw={'500'}
+          fs={'1.2rem'}
+          background={'rgb(0, 163, 255)'}
+        />
       </div>
     </CreateContentStyled>
   )
@@ -213,5 +206,4 @@ const CreateContentStyled = styled.form`
       width: initial;
     }
   }
-`;
-
+`

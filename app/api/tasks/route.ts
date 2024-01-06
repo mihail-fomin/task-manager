@@ -88,7 +88,6 @@ export async function PUT(req: Request) {
         isCompleted,
       },
     })
-    console.log('task: ', task)
 
     return NextResponse.json(task)
   } catch (error) {
