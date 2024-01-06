@@ -23,14 +23,13 @@ export const GlobalProvider = ({ children }) => {
     setCollapsed(!collapsed)
   }
 
-
   const allTasks = async () => {
     setIsloading(true)
     try {
       const response = await axios.get('/api/tasks')
 
       const sorted = response.data.sort((a, b) => {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() 
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       })
 
       setTasks(sorted)

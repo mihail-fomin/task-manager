@@ -58,7 +58,7 @@ export default function Home() {
         toast.error(response.data.error)
         return
       }
-      
+
       toast.success('Task created successfully')
       allTasks()
       closeModal()

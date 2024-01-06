@@ -32,7 +32,7 @@ export default function Sidebar() {
 
   return (
     <SidebarStyled theme={theme} collapsed={collapsed}>
-      <button className='toggle-nav' onClick={collapseMenu}>
+      <button className="toggle-nav" onClick={collapseMenu}>
         {collapsed ? bars : arrowLeft}
       </button>
       <div className="profile">
@@ -100,8 +100,7 @@ const SidebarStyled = styled.nav<{ collapsed: boolean }>`
     z-index: 100;
 
     transition: all 0.3s cubic-bezier(0.53, 0.21, 0, 1);
-    transform: ${(props) =>
-      props.collapsed ? "translateX(-107%)" : "translateX(0)"};
+    transform: ${(props) => (props.collapsed ? 'translateX(-107%)' : 'translateX(0)')};
 
     .toggle-nav {
       display: block !important;

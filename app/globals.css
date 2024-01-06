@@ -32,13 +32,13 @@ button {
   background: transparent;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type='date']::-webkit-calendar-picker-indicator {
   filter: invert(1);
   font-size: 1.5rem;
   cursor: pointer;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;

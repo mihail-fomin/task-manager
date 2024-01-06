@@ -7,5 +7,5 @@ export default function page() {
     <div className="flex items-center justify-center h-full">
       <SignUp />
     </div>
-  );
+  )
 }
