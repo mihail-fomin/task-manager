@@ -12,7 +12,7 @@ interface Props {
   tasks: any[]
 }
 
-function Tasks({ title, tasks }: Props) {
+export default function Tasks({ title, tasks }: Props) {
   const { theme, isLoading, openModal, modal } = useGlobalState()
 
   return (
@@ -137,5 +137,3 @@ const TaskStyled = styled.main`
     }
   }
 `
-
-export default Tasks

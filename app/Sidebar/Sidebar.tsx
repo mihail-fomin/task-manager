@@ -8,11 +8,11 @@ import styled from 'styled-components'
 import { useGlobalState } from '../context/globalProvider'
 import menu from '../utils/menu'
 import Button from '../Components/Button/Button'
-import { logout } from '../utils/Icons'
+import { arrowLeft, bars, logout } from '../utils/Icons'
 import { useClerk, UserButton, useUser } from '@clerk/nextjs'
 
 export default function Sidebar() {
-  const { theme } = useGlobalState()
+  const { theme, collapsed, collapseMenu } = useGlobalState()
   const { signOut } = useClerk()
 
   const { user } = useUser()
@@ -31,7 +31,10 @@ export default function Sidebar() {
   }
 
   return (
-    <SidebarStyled theme={theme}>
+    <SidebarStyled theme={theme} collapsed={collapsed}>
+      <button className='toggle-nav' onClick={collapseMenu}>
+        {collapsed ? bars : arrowLeft}
+      </button>
       <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">
@@ -78,7 +81,7 @@ export default function Sidebar() {
   )
 }
 
-const SidebarStyled = styled.nav`
+const SidebarStyled = styled.nav<{ collapsed: boolean }>`
   position: relative;
   width: ${(props) => props.theme.sidebarWidth};
   background-color: ${(props) => props.theme.colorBg2};
@@ -97,6 +100,8 @@ const SidebarStyled = styled.nav`
     z-index: 100;
 
     transition: all 0.3s cubic-bezier(0.53, 0.21, 0, 1);
+    transform: ${(props) =>
+      props.collapsed ? "translateX(-107%)" : "translateX(0)"};
 
     .toggle-nav {
       display: block !important;

@@ -16,7 +16,7 @@ export default function Home() {
   const [completed, setCompleted] = useState(false)
   const [important, setImportant] = useState(false)
 
-  const { theme } = useGlobalState()
+  const { theme, allTasks, closeModal } = useGlobalState()
 
   const handleChange = (name: string) => (e: any) => {
     switch (name) {
@@ -58,8 +58,10 @@ export default function Home() {
         toast.error(response.data.error)
         return
       }
-
+      
       toast.success('Task created successfully')
+      allTasks()
+      closeModal()
     } catch (error) {
       toast.error('Something went wrong')
       console.error(error)
