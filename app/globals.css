@@ -16,6 +16,20 @@
   }
 }
 
+input,
+textarea,
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background-color: #181818;
