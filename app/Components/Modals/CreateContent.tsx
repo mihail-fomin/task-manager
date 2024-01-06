@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import { useGlobalState } from '@/app/context/globalProvider'
 import styled from 'styled-components'
 import Button from '../Button/Button'
-import { add, plus } from '@/app/utils/Icons'
+import { add } from '@/app/utils/Icons'
 
 export default function Home() {
   const [title, setTitle] = useState('')
