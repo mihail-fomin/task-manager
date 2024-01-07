@@ -10,6 +10,7 @@ import menu from '../utils/menu'
 import Button from '../Components/Button/Button'
 import { arrowLeft, bars, logout } from '../utils/Icons'
 import { useClerk, UserButton, useUser } from '@clerk/nextjs'
+import Loader from '../Components/Loader/Loader'
 
 export default function Sidebar() {
   const { theme, collapsed, collapseMenu } = useGlobalState()
@@ -38,7 +39,10 @@ export default function Sidebar() {
       <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">
-          <Image width={70} height={70} src={imageUrl} alt="profile" />
+          {imageUrl ?
+            <Image width={70} height={70} src={imageUrl} alt="profile" />
+            :  <Loader />
+          }
         </div>
         <div className="user-btn absolute z-20 top-0 w-full h-full">
           <UserButton />
