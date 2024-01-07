@@ -17,8 +17,6 @@ export default function Tasks({ title, tasks }: Props) {
 
   return (
     <TaskStyled theme={theme}>
-      {/* {!isLoading ? (
-        <> */}
       {modal && <Modal content={<CreateContent />} />}
       <h1>{title}</h1>
 
@@ -42,12 +40,6 @@ export default function Tasks({ title, tasks }: Props) {
           Add New Task
         </button>
       </div>
-      {/* </>
-      ) : ( */}
-      {/* <div className="tasks-loader w-full h-full flex items-center justify-center">
-          <span className="loader"></span>
-        </div>
-      )} */}
     </TaskStyled>
   )
 }
