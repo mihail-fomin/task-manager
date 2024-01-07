@@ -39,10 +39,7 @@ export default function Sidebar() {
       <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">
-          {imageUrl ?
-            <Image width={70} height={70} src={imageUrl} alt="profile" />
-            :  <Loader />
-          }
+          {imageUrl ? <Image width={70} height={70} src={imageUrl} alt="profile" /> : <Loader />}
         </div>
         <div className="user-btn absolute z-20 top-0 w-full h-full">
           <UserButton />
