@@ -27,10 +27,7 @@ export default function Tasks({ title, tasks }: Props) {
 
       <div className="tasks grid">
         {tasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-          />
+          <TaskItem key={task.id} task={task} />
         ))}
         <button className="create-task" onClick={openModal}>
           {add}

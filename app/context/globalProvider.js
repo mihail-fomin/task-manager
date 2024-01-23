@@ -17,8 +17,8 @@ export const GlobalProvider = ({ children }) => {
   const [tasks, setTasks] = useState([])
   const [modal, setModal] = useState(false)
 
-  const [editModal, setEditModal] = useState(false);
-  const [editingTask, setEditingTask] = useState(null);
+  const [editModal, setEditModal] = useState(false)
+  const [editingTask, setEditingTask] = useState(null)
 
   const [isLoading, setIsloading] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
@@ -92,7 +92,6 @@ export const GlobalProvider = ({ children }) => {
     setEditingTask(task)
     setEditModal(true)
   }
-
 
   const closeModal = () => {
     setModal(false)

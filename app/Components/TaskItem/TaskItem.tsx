@@ -10,9 +10,8 @@ interface Props {
   task: Task
 }
 
-function TaskItem({ task}: Props) {
-  const { theme, deleteTask, updateTask, openModal, openEditModal } = useGlobalState()
-
+function TaskItem({ task }: Props) {
+  const { theme, deleteTask, updateTask, openEditModal } = useGlobalState()
 
   return (
     <TaskItemStyled theme={theme}>
@@ -48,9 +47,9 @@ function TaskItem({ task}: Props) {
             Incompleted
           </button>
         )}
-        <button className="edit"
-          onClick={() => openEditModal(task)}  
-        >{edit}</button>
+        <button className="edit" onClick={() => openEditModal(task)}>
+          {edit}
+        </button>
         <button
           className="delete"
           onClick={() => {

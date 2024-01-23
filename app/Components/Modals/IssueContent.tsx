@@ -19,7 +19,6 @@ export default function IssueContent() {
   const [completed, setCompleted] = useState(editingTask ? editingTask.isCompleted : false)
   const [important, setImportant] = useState(editingTask ? editingTask.isImportant : false)
 
-
   const handleChange = (name: string) => (e: any) => {
     switch (name) {
       case 'title':
@@ -45,11 +44,9 @@ export default function IssueContent() {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-
     try {
       let response
       if (editingTask) {
-
         const task = {
           id: editingTask.id,
           title,
@@ -61,7 +58,6 @@ export default function IssueContent() {
 
         response = updateTask(task)
       } else {
-
         const task = {
           title,
           description,
@@ -69,7 +65,7 @@ export default function IssueContent() {
           completed,
           important,
         }
-    
+
         response = await axios.post('/api/tasks', task)
       }
 
@@ -79,7 +75,7 @@ export default function IssueContent() {
       }
 
       fetchAllTasks()
-      
+
       if (editingTask) {
         closeEditModal()
         return
@@ -87,7 +83,6 @@ export default function IssueContent() {
 
       toast.success('Task created successfully')
       closeModal()
-
     } catch (error) {
       toast.error('Something went wrong')
       console.error(error)
@@ -145,7 +140,7 @@ export default function IssueContent() {
         <Button
           type="submit"
           name={editingTask ? 'Update the Task' : 'Create a Task'}
-          icon={editingTask? edit : add}
+          icon={editingTask ? edit : add}
           padding={'0.8rem 2rem'}
           borderRad={'0.8rem'}
           fw={'500'}
