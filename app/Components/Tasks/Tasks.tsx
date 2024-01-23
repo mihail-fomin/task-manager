@@ -2,22 +2,23 @@
 import { useGlobalState } from '@/app/context/globalProvider'
 import React from 'react'
 import styled from 'styled-components'
-import CreateContent from '../Modals/CreateContent'
+import IssueContent from '../Modals/IssueContent'
 import TaskItem from '../TaskItem/TaskItem'
 import { add, plus } from '@/app/utils/Icons'
 import Modal from '../Modals/Modal'
+import { Task } from '../Modals/models'
 
 interface Props {
   title: string
-  tasks: any[]
+  tasks: Task[]
 }
 
 export default function Tasks({ title, tasks }: Props) {
-  const { theme, openModal, modal } = useGlobalState()
+  const { theme, openModal, modal, editModal } = useGlobalState()
 
   return (
     <TaskStyled theme={theme}>
-      {modal && <Modal content={<CreateContent />} />}
+      {(modal || editModal) && <Modal content={<IssueContent />} />}
       <h1>{title}</h1>
 
       <button className="btn-rounded" onClick={openModal}>
@@ -28,11 +29,7 @@ export default function Tasks({ title, tasks }: Props) {
         {tasks.map((task) => (
           <TaskItem
             key={task.id}
-            title={task.title}
-            description={task.description}
-            date={task.date}
-            isCompleted={task.isCompleted}
-            id={task.id}
+            task={task}
           />
         ))}
         <button className="create-task" onClick={openModal}>

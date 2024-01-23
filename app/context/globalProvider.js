@@ -16,6 +16,10 @@ export const GlobalProvider = ({ children }) => {
 
   const [tasks, setTasks] = useState([])
   const [modal, setModal] = useState(false)
+
+  const [editModal, setEditModal] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
+
   const [isLoading, setIsloading] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
 
@@ -23,7 +27,7 @@ export const GlobalProvider = ({ children }) => {
     setCollapsed(!collapsed)
   }
 
-  const allTasks = async () => {
+  const fetchAllTasks = async () => {
     setIsloading(true)
     try {
       const response = await axios.get('/api/tasks')
@@ -46,7 +50,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       await axios.delete(`/api/tasks/${id}`)
 
-      allTasks()
+      fetchAllTasks()
       setIsloading(false)
       toast.success('Task deleted')
     } catch (error) {
@@ -61,7 +65,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       await axios.put(`/api/tasks`, task)
 
-      allTasks()
+      fetchAllTasks()
       setIsloading(false)
       toast.success('Task updated')
     } catch (error) {
@@ -76,7 +80,7 @@ export const GlobalProvider = ({ children }) => {
 
   React.useEffect(() => {
     if (user) {
-      allTasks()
+      fetchAllTasks()
     }
   }, [user])
 
@@ -84,8 +88,19 @@ export const GlobalProvider = ({ children }) => {
     setModal(true)
   }
 
+  const openEditModal = (task) => {
+    setEditingTask(task)
+    setEditModal(true)
+  }
+
+
   const closeModal = () => {
     setModal(false)
+  }
+
+  const closeEditModal = () => {
+    setEditingTask(null)
+    setEditModal(false)
   }
 
   return (
@@ -93,7 +108,7 @@ export const GlobalProvider = ({ children }) => {
       value={{
         theme,
         tasks,
-        allTasks,
+        fetchAllTasks,
         completedTasks,
         incompletedTasks,
         importantTasks,
@@ -101,8 +116,12 @@ export const GlobalProvider = ({ children }) => {
         updateTask,
         isLoading,
         modal,
+        editModal,
         openModal,
         closeModal,
+        openEditModal,
+        closeEditModal,
+        editingTask,
         collapsed,
         collapseMenu,
       }}

@@ -8,15 +8,17 @@ import { useGlobalState } from '@/app/context/globalProvider'
 import styled from 'styled-components'
 import Button from '../Button/Button'
 import { add } from '@/app/utils/Icons'
+import { edit } from '@/app/utils/Icons'
 
-export default function Home() {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [date, setDate] = useState('')
-  const [completed, setCompleted] = useState(false)
-  const [important, setImportant] = useState(false)
+export default function IssueContent() {
+  const { theme, fetchAllTasks, closeModal, editingTask, updateTask, closeEditModal } = useGlobalState()
 
-  const { theme, allTasks, closeModal } = useGlobalState()
+  const [title, setTitle] = useState(editingTask ? editingTask.title : '')
+  const [description, setDescription] = useState(editingTask ? editingTask.description : '')
+  const [date, setDate] = useState(editingTask ? editingTask.date : '')
+  const [completed, setCompleted] = useState(editingTask ? editingTask.isCompleted : false)
+  const [important, setImportant] = useState(editingTask ? editingTask.isImportant : false)
+
 
   const handleChange = (name: string) => (e: any) => {
     switch (name) {
@@ -43,25 +45,49 @@ export default function Home() {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-    const task = {
-      title,
-      description,
-      date,
-      completed,
-      important,
-    }
 
     try {
-      const response = await axios.post('/api/tasks', task)
+      let response
+      if (editingTask) {
 
-      if (response.data.error) {
+        const task = {
+          id: editingTask.id,
+          title,
+          description,
+          date,
+          isCompleted: completed,
+          isImportant: important,
+        }
+
+        response = updateTask(task)
+      } else {
+
+        const task = {
+          title,
+          description,
+          date,
+          completed,
+          important,
+        }
+    
+        response = await axios.post('/api/tasks', task)
+      }
+
+      if (response.data?.error) {
         toast.error(response.data.error)
         return
       }
 
+      fetchAllTasks()
+      
+      if (editingTask) {
+        closeEditModal()
+        return
+      }
+
       toast.success('Task created successfully')
-      allTasks()
       closeModal()
+
     } catch (error) {
       toast.error('Something went wrong')
       console.error(error)
@@ -69,8 +95,8 @@ export default function Home() {
   }
 
   return (
-    <CreateContentStyled onSubmit={handleSubmit} theme={theme}>
-      <h1>Create a Task</h1>
+    <IssueContentStyled onSubmit={handleSubmit} theme={theme}>
+      <h1>{editingTask ? 'Update the Task' : 'Create a Task'}</h1>
       <div className="input-control">
         <label htmlFor="title">Title</label>
         <input type="text" id="title" value={title} name="title" onChange={handleChange('title')} placeholder="Title" />
@@ -118,8 +144,8 @@ export default function Home() {
       <div className="submit-btn flex justify-end">
         <Button
           type="submit"
-          name="Create Task"
-          icon={add}
+          name={editingTask ? 'Update the Task' : 'Create a Task'}
+          icon={editingTask? edit : add}
           padding={'0.8rem 2rem'}
           borderRad={'0.8rem'}
           fw={'500'}
@@ -127,11 +153,11 @@ export default function Home() {
           background={'rgb(0, 163, 255)'}
         />
       </div>
-    </CreateContentStyled>
+    </IssueContentStyled>
   )
 }
 
-const CreateContentStyled = styled.form`
+const IssueContentStyled = styled.form`
   > h1 {
     font-size: clamp(1.2rem, 5vw, 1.6rem);
     font-weight: 600;

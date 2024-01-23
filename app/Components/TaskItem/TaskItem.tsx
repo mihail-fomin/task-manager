@@ -4,33 +4,32 @@ import { edit, trash } from '@/app/utils/Icons'
 import React from 'react'
 import styled from 'styled-components'
 import formatDate from '@/app/utils/formatDate'
+import { Task } from '../Modals/models'
 
 interface Props {
-  title: string
-  description: string
-  date: string
-  isCompleted: boolean
-  id: string
+  task: Task
 }
 
-function TaskItem({ title, description, date, isCompleted, id }: Props) {
-  const { theme, deleteTask, updateTask } = useGlobalState()
+function TaskItem({ task}: Props) {
+  const { theme, deleteTask, updateTask, openModal, openEditModal } = useGlobalState()
+
+
   return (
     <TaskItemStyled theme={theme}>
-      <h1>{title}</h1>
-      <p>{description}</p>
-      <p className="date">{formatDate(date)}</p>
+      <h1>{task.title}</h1>
+      <p>{task.description}</p>
+      <p className="date">{formatDate(task.date)}</p>
       <div className="task-footer">
-        {isCompleted ? (
+        {task.isCompleted ? (
           <button
             className="completed"
             onClick={() => {
-              const task = {
-                id,
-                isCompleted: !isCompleted,
+              const newStatus = {
+                id: task.id,
+                isCompleted: !task.isCompleted,
               }
 
-              updateTask(task)
+              updateTask(newStatus)
             }}
           >
             Completed
@@ -39,21 +38,23 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
           <button
             className="incompleted"
             onClick={() => {
-              const task = {
-                id,
-                isCompleted: !isCompleted,
+              const newStatus = {
+                id: task.id,
+                isCompleted: !task.isCompleted,
               }
-              updateTask(task)
+              updateTask(newStatus)
             }}
           >
             Incompleted
           </button>
         )}
-        <button className="edit">{edit}</button>
+        <button className="edit"
+          onClick={() => openEditModal(task)}  
+        >{edit}</button>
         <button
           className="delete"
           onClick={() => {
-            deleteTask(id)
+            deleteTask(task.id)
           }}
         >
           {trash}
